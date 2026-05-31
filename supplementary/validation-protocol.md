@@ -6,7 +6,7 @@
 
 ---
 
-## Phase 1 — Environment (target: 2–3 days)
+## Phase 1 — Environment 
 
 ### 1.1 Foundry and fork setup
 
@@ -51,7 +51,7 @@ Pin exact versions in `requirements.txt`. The PIDGC module must run on stock Pyt
 
 ---
 
-## Phase 2 — Reference contracts (target: 4–6 days; F is the long pole)
+## Phase 2 — Reference contracts 
 
 ### 2.1 On-mainnet architectures — use directly
 
@@ -86,7 +86,7 @@ forge script scripts/DeployAll.s.sol --rpc-url http://localhost:8545 --broadcast
 
 ---
 
-## Phase 3 — Workload design (target: 2–3 days)
+## Phase 3 — Workload design 
 
 ### 3.1 The 100-trace split per architecture
 
@@ -128,7 +128,7 @@ EIP-2929 warmth is per-transaction, so "warm" traces must touch the relevant slo
 
 ---
 
-## Phase 4 — Trace collection (target: 3–5 days)
+## Phase 4 — Trace collection 
 
 ### 4.1 Execution loop
 
@@ -182,7 +182,7 @@ Every field must be derivable without re-executing the EVM — that is, the reco
 
 ---
 
-## Phase 5 — PIDGC evaluation (target: 2–3 days)
+## Phase 5 — PIDGC evaluation 
 
 ### 5.1 Reference implementation
 
@@ -262,31 +262,6 @@ For each outlier (|diff| > 100):
 
 5. **Unexpected precompile behaviour.** If F's ECPAIRING differs from `45000 + 34000·k`, check that the verifier is using the BN254 precompile at `0x08` and not a bundled pairing library. Update AS-4 scope if needed.
 
----
-
-## Phase 7 — Paper integration (target: 1–2 days)
-
-### 7.1 Text changes
-
-- **Abstract.** Replace "The paper's quantitative claims are therefore model-consistent, not yet trace-consistent" with "Quantitative claims are validated against N=[total] mainnet-fork traces with mean absolute error ≤ [ε'] gas per trace (§5.3a)."
-
-- **§5 (Results).** Insert new subsection §5.3a "Empirical validation" with Table 3 (observed vs predicted per architecture: mean, median, max-abs, outlier count). Keep Figure 3 as-is; add a footnote noting it uses empirically validated points.
-
-- **§5.4 (Limitations).** Promote the taxonomy limit to first position. Move validation from limit to historical note ("an earlier version of this paper reported model-consistent predictions; the present version validates them empirically"). Third limit (AS-2) stays.
-
-- **Changelog.** Bump to v0.6 (empirical validation pass).
-
-### 7.2 Artefact release
-
-Create a GitHub repo with the structure from §1.2. Tag `v1.0-validation`. Archive on Zenodo for a DOI. Add the DOI to the paper's §3.4 and to a new §7 "Artefact availability" section.
-
-Include `CHECKS.md` specifying what a successful third-party reproduction must show: all ~800 PIDGC predictions match the shipped traces within ε on any machine that runs the pinned Foundry version against the pinned fork block.
-
-### 7.3 Artefact evaluation (optional)
-
-If the target venue has an artefact-evaluation track (ACM Functional, ACM Reusable, IEEE Badged), submit for it. The reproduce.sh script and CHECKS.md already satisfy the core requirements; a short response to the artefact-evaluation questionnaire completes it.
-
----
 
 ## Risks and contingencies
 
